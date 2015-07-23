@@ -2,6 +2,11 @@
 Changelog for package play_motion_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Migrate to format2
+* Contributors: Bence Magyar
+
 0.4.0 (2014-04-23)
 ------------------
 * Add service call to query available motions.

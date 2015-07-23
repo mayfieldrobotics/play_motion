@@ -2,6 +2,23 @@
 Changelog for package play_motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Migrate to format2
+* remove module file
+* Add missing configuration for depender projects
+* Refactor argument names to convention
+* Add function alternatives where NodeHandle defaults to one of play_motion
+* log error when core is 0
+* Add default values and units to sample config.
+* Add new optional config parameter.
+  Add new parameter to configure the minimum approach time to use when
+  skip_planning = true.
+  If we time-parameterize trajectories using MoveIt's built-in methods, we'd
+  be able to get rid of this additional parameter, but in the meantime, it
+  addresses an important issue.
+* Contributors: Adolfo Rodriguez Tsouroukdissian, Bence Magyar, Daniel Pinyol, Víctor López
+
 0.4.0 (2014-04-23)
 ------------------
 * Add install() rule for headers
