@@ -2,8 +2,8 @@
 Changelog for package play_motion_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.4.1 (2015-07-23)
+------------------
 * Migrate to format2
 * Contributors: Bence Magyar
 
