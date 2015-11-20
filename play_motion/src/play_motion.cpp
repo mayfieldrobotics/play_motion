@@ -46,7 +46,10 @@
 #include <control_msgs/FollowJointTrajectoryAction.h>
 #include <sensor_msgs/JointState.h>
 
+#ifndef DISABLE_PLANNING
 #include "play_motion/approach_planner.h"
+#endif
+
 #include "play_motion/move_joint_group.h"
 #include "play_motion/xmlrpc_helpers.h"
 
@@ -138,7 +141,9 @@ namespace play_motion
     ctrlr_updater_.registerUpdateCb(boost::bind(&PlayMotion::updateControllersCb, this, _1, _2));
 
     ros::NodeHandle private_nh("~");
+#ifndef DISABLE_PLANNING
     approach_planner_.reset(new ApproachPlanner(private_nh));
+#endif
   }
 
   PlayMotion::Goal::Goal(const Callback& cbk)
@@ -336,13 +341,18 @@ next_joint:;
       foreach(const std::string& motion_joint, motion_joints)
         curr_pos.push_back(joint_states_[motion_joint]); // TODO: What if motion joint does not exist?
 
-      // Approach trajectory
       Trajectory motion_points_safe;
+#ifndef DISABLE_PLANNING
+      // Approach trajectory
       if (!approach_planner_->prependApproach(motion_joints, curr_pos,
                                               skip_planning,
                                               motion_points, motion_points_safe))
         throw PMException("Approach motion planning failed", PMR::NO_PLAN_FOUND);// TODO: Expose descriptive error string from approach_planner
-
+#else
+      foreach (const TrajPoint& p, motion_points) {
+        motion_points_safe.push_back(p);
+      }
+#endif
       // TODO: Resample and validate output trajectory
       populateVelocities(motion_points_safe, motion_points_safe);
 
